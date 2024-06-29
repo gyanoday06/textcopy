@@ -8,9 +8,9 @@ router.get('/', async (req, res) => {
   try {
     const text = await Text.findOne({});
     if (text) {
-      res.json({ text: text.content });
+      res.send(text.content); // Send plain text content
     } else {
-      res.json({ text: '' });  // Return an empty string if no text is found
+      res.send('');  // Return an empty string if no text is found
     }
   } catch (err) {
     res.status(500).send(err.message);
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
       text = new Text({ content: newText });
     }
     await text.save();
-    res.status(200).json({ message: 'Text updated successfully', text: text.content });
+    res.status(200).send(text.content); // Send plain text response
   } catch (err) {
     res.status(500).send(err.message);
   }

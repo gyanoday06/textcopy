@@ -1,0 +1,13 @@
+name: Ping Render Instance
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # This will run the job every 10 minutes
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send a request to keep the Render instance active
+        run: curl https://textcopy-backend.onrender.com/text
